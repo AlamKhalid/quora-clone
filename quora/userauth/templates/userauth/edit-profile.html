@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% load static %} {% block head %} {% endblock %} 
+{% block content %}
+
+<div class="container col-8 mx-auto border shadow-md p-3">
+  <h2 class="mb-2">Edit Profile</h2>
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="row gy-3">
+      <div class="col-12">
+        <label class="form-label">Profile Picture</label>
+        {{form.image}}
+      </div>
+      <div class="col-6">{{form.first_name}}</div>
+      <div class="col-6">{{form.last_name}}</div>
+      <div class="col-6">{{form.username}}</div>
+      <div class="col-6">{{form.email}}</div>
+      <div class="col-6">{{form.age}}</div>
+      <div class="col-6">{{form.gender}}</div>
+    </div>
+
+    <button class="btn btn-warning mt-3" type="submit">Update Profile</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<div class="container">
+  <h2 class="mb-2 text-center">About</h2>
+  <div class="d-flex justify-content-center mb-5">
+    <img src="/media/{{profile.image}}" width="100" />
+  </div>
+  <div class="row col-6 mx-auto mb-5">
+    <div class="col-6">First Name: {{user.first_name}}</div>
+    <div class="col-6">Last Name: {{user.last_name}}</div>
+    <div class="col-6">Email: {{user.email}}</div>
+    <div class="col-6">Username: {{user.username}}</div>
+    <div class="col-6">Age: {{profile.age}}</div>
+    <div class="col-6">Gender: {{profile.gender}}</div>
+  </div>
+  <h5>Topics Followed</h5>
+  {% if followed_topics.count == 0 %}
+  <p>No topics followed yet</p>
+  {% else %}
+  <ul>
+    {% for topic in followed_topics %}
+    <li>{{ topic.title }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  <h5>Questions Asked</h5>
+  {% if questions_asked.count == 0 %}
+  <p>No questions asked yet</p>
+  {% else %}
+  <ul>
+    {% for question in questions_asked %}
+    <li>{{ question.description }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  <h5>Answers Given</h5>
+  {% if answers_given.count == 0 %}
+  <p>No answers given yet</p>
+  {% else %}
+  <ul>
+    {% for answer in answers_given %}
+    <li>{{ answer.description }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+{% endblock %}

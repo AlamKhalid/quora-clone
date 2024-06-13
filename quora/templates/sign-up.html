@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+
+{% endblock %} {% block content %}
+
+<div class="container col-8 mx-auto border shadow-md p-3">
+  <h1 class="mb-4 text-center">QUORA CLONE</h1>
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div class="row gy-3">
+      <div class="col-6">{{form.first_name}}</div>
+      <div class="col-6">{{form.last_name}}</div>
+      <div class="col-6">{{form.username}}</div>
+      <div class="col-6">{{form.email}}</div>
+      <div class="col-6">{{form.age}}</div>
+      <div class="col-6">{{form.gender}}</div>
+      <div class="col-6">{{form.password1}} </div>
+      <div class="col-6">{{form.password2}}</div>
+    </div>
+
+    <button class="btn btn-primary mt-3" type="submit">Sign Up</button>
+  </form>
+  <div class="sign-up mt-2">
+    Already have an account? <a href="{% url 'sign-in' %}">Sign In</a>
+  </div>
+</div>
+{% endblock %}

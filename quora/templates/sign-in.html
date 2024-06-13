@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<div class="container col-8 mx-auto border shadow-md p-3">
+  <h1 class="mb-4 text-center">QUORA CLONE</h1>
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div class="row gy-3">
+      <div class="col-6">
+        <label for="exampleInputEmail1" class="form-label">Username</label>
+        {{form.username}}
+      </div>
+      <div class="col-6">
+        <label for="exampleInputEmail1" class="form-label">Password</label>
+        {{form.password}}
+      </div>
+    </div>
+
+    <button class="btn btn-primary mt-3" type="submit">Sign In</button>
+  </form>
+  <div class="sign-up mt-2">
+    Don't have an account? <a href="{% url 'sign-up' %}">Sign Up</a>
+  </div>
+</div>
+{% endblock %}

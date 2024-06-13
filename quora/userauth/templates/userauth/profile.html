@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<div class="container">
+  <h2 class="mb-2 text-center">User Profile</h2>
+  <div class="d-flex justify-content-center mb-5">
+    <img src="/media/{{profile.image}}" width="100" />
+  </div>
+  <div class="row col-6 mx-auto mb-5">
+    <div class="col-6">First Name: {{user.first_name}}</div>
+    <div class="col-6">Last Name: {{user.last_name}}</div>
+    <div class="col-6">Email: {{user.email}}</div>
+    <div class="col-6">Username: {{user.username}}</div>
+    <div class="col-6">Age: {{profile.age}}</div>
+    <div class="col-6">Gender: {{profile.gender}}</div>
+  </div>
+  <h5>Questions Answered</h5>
+  {% if questions_answered.count == 0 %}
+  <p>No questions answered yet</p>
+  {% else %}
+  <ul>
+    {% for answer in question_answered %}
+    <li>{{ answer.question.description }}</li>
+    {% endfor %}
+  </ul> {% endif %}
+</div>
+ {% endblock %}

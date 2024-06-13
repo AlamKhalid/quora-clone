@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container col-8 mx-auto border shadow-md p-3">
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row gy-3">
+      <div class="col-12">
+        <label for="exampleInputEmail1" class="form-label"
+          >Choose Topic of Question</label
+        >
+        {{form.topic}}
+      </div>
+      <div class="col-12">
+        <label for="exampleInputEmail1" class="form-label"
+          >Question Description</label
+        >
+        {{form.description}}
+      </div>
+    </div>
+    <button class="btn btn-success mt-3" type="submit">Post Question</button>
+  </form>
+</div>
+{% endblock %}

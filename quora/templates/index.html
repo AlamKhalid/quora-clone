@@ -1,0 +1,78 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container">
+  <div class="d-flex w-100 justify-content-center row">
+    {% for question in questions %}
+    <div class="card col-7 mb-4">
+      <div class="card-body">
+        <div class="d-flex align-items-center gap-3">
+          <img
+            src="/media/{{question.topic.user.profile.image}}"
+            width="100"
+            height="100"
+            style="border-radius: 50%"
+          />
+          <div class="d-flex w-100 justify-content-between">
+            <div class="d-flex flex-column">
+              <h5 class="card-title mb-0">{{question.user.username}}</h5>
+              <h6 class="card-subtitle mb-2 text-body-secondary text-muted">
+                {{question.created_at}}
+              </h6>
+            </div>
+            <div class="d-flex flex-column">
+              <a href="{% url 'question-detail' question.id %}"
+                ><span><u>View Question</u></span></a
+              >
+              <span class="card-title mb-0"
+                >Topic: {{question.topic.title}}</span
+              >
+            </div>
+          </div>
+        </div>
+        <p class="card-text mt-4">{{question.description}}</p>
+        <div class="d-flex gap-4">
+          <div class="d-flex gap-2 align-items-center">
+            <a href="{% url 'like-question' question.id %}" class="text-black"><i class="fa fa-thumbs-{% if not question.liked %}o-{% endif %}up fa-2x" aria-hidden="true"></i></a
+            ><span>{{question.liked_by.count}}</span>
+          </div>
+          <div class="d-flex gap-2 align-items-center">
+            <a href="{% url 'dislike-question' question.id %}" class="text-black"><i class="fa fa-thumbs-{% if not question.disliked %}o-{% endif %}down fa-2x" aria-hidden="true"></i></a
+              ><span>{{question.disliked_by.count}}</span>
+          </div>
+        </div>
+        <hr />
+        <div class="d-flex justify-content-between align-items-center">
+          <h6 class="card-subtitle mb-2 text-body-secondary text-muted">
+            Answered by: {{question.answer_set.count}} people
+          </h6>
+          <a href="{% url 'create-answer' question.id %}"
+            ><button class="btn btn-danger">Answer</button></a
+          >
+        </div>
+        {% if question.answer_set.count == 0 %}
+        <p class="card-text mt-4">No answers yet</p>
+        {% else %} 
+          {% for _, answers in answers.items %} 
+            {% for answer in answers %}
+        <hr />
+        <div class="d-flex flex-column gap-1">
+          <span>{{answer.description}}</span>
+          <span>Answered by: {{answer.user.username}}</span>
+          <div class="d-flex gap-4">
+            <div class="d-flex gap-2 align-items-center">
+              <a href="{% url 'like-answer' answer.id %}" class="text-black"><i class="fa fa-thumbs-{% if not answer.liked %}o-{% endif %}up fa-2x" aria-hidden="true"></i></a
+                ><span>{{answer.liked_by.count}}</span>
+            </div>
+            <div class="d-flex gap-2 align-items-center">
+              <a href="{% url 'dislike-answer' answer.id %}" class="text-black"><i class="fa fa-thumbs-{% if not answer.disliked %}o-{% endif %}down fa-2x" aria-hidden="true"></i></a
+                ><span>{{answer.disliked_by.count}}</span>
+            </div>
+          </div>
+        </div>
+        {% endfor %} {% endfor %} {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
